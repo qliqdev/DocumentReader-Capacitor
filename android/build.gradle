@@ -8,10 +8,23 @@ ext {
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://maven.regulaforensics.com/RegulaDocumentReader"
+        }
+        maven {
+            url "https://maven.regulaforensics.com/RegulaDocumentReader/Beta"
+        }
     }
 }
 
@@ -44,7 +57,6 @@ android {
 repositories {
     google()
     mavenCentral()
-    jcenter()
 }
 
 
@@ -52,6 +64,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':capacitor-android')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation('com.regula.documentreader:api:6.5.7488') {
+        transitive = true
+    }
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"

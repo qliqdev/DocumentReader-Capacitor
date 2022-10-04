@@ -1,6 +1,8 @@
 import Foundation
 import Capacitor
 
+import UIKit;
+
 /**
  * Please read the Capacitor iOS Plugin Development Guide
  * here: https://capacitorjs.com/docs/plugins/ios
@@ -13,6 +15,22 @@ public class DocumentReaderPlugin: CAPPlugin {
         let value = call.getString("value") ?? ""
         call.resolve([
             "value": implementation.echo(value)
+        ])
+    }
+
+    @objc func initializeReaderAutomatically(_ call: CAPPluginCall) {
+        implementation.initializeReaderAutomatically(call)
+    }
+
+    @objc func getAPIVersion(_ call: CAPPluginCall) {
+        call.resolve([
+            "value": implementation.getAPIVersion()
+        ])
+    }
+    
+    @objc func getAvailableScenarios(_ call: CAPPluginCall) {
+        call.resolve([
+            "value": implementation.getAvailableScenarios()
         ])
     }
 }
